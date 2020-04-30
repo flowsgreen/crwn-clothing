@@ -10,7 +10,7 @@ const config = {
   storageBucket: "crwn-db-9198f.appspot.com",
   messagingSenderId: "1050708446794",
   appId: "1:1050708446794:web:9619fc609b9dc62fdaa0b3",
-  measurementId: "G-91W52K0VZV"
+  measurementId: "G-91W52K0VZV",
 };
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
@@ -27,7 +27,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         displayName,
         email,
         createdAt,
-        ...additionalData
+        ...additionalData,
       });
     } catch (error) {
       console.log("error creating user", error.message);
@@ -35,6 +35,20 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   }
 
   return userRef;
+};
+
+// programmatically add shop array to firebase
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  const collectionRef = firestore.collection(collectionKey);
+  const batch = firestore.batch();
+  objectsToAdd.forEach((obj) => {
+    const newDocRef = collectionRef.doc();
+    batch.set(newDocRef, obj); // firestore ".set()" calls individual element one at a time. batch group all write request
+  });
+  return await batch.commit();
 };
 
 firebase.initializeApp(config);
