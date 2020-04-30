@@ -8,7 +8,7 @@ import {
   CollectionItemsContainer,
 } from "./collection.styles";
 
-const collectionPage = ({ collection }) => {
+const CollectionPage = ({ collection }) => {
   const { title, items } = collection;
   return (
     <CollectionPageContainer>
@@ -26,4 +26,4 @@ const mapStateToProps = (state, ownProps) => ({
   collection: selectCollection(ownProps.match.params.collectionId)(state),
 });
 
-export default connect(mapStateToProps)(collectionPage);
+export default connect(mapStateToProps)(CollectionPage);
