@@ -9,8 +9,6 @@ const mapStateToProps = createStructuredSelector({
   isLoading: (state) => !selectIsCollectionsLoaded(state),
 });
 
-// equivalent to connect(mapStateToProps)(WithSpinner(CollectionPage))
-// evaluate inside-out from right to left. WithSpinner first, passing in CollectionPage
 const CollectionPageContainer = compose(
   connect(mapStateToProps),
   WithSpinner
