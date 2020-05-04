@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const bodyParser = require("body-Parser");
+const bodyParser = require("body-parser");
 const path = require("path");
 
 if (process.env.NODE_ENV !== "production") require("dotenv").config();
@@ -35,7 +35,7 @@ app.post("/payment", (req, res) => {
     currency: "usd",
   };
 
-  stripe.charge.create(body, (stripeErr, stripeRes) => {
+  stripe.charges.create(body, (stripeErr, stripeRes) => {
     if (stripeErr) {
       res.status(500).send({ error: stripeErr });
     } else {
